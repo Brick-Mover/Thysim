@@ -1,10 +1,10 @@
-#Oct 15 Version of ThysimModel
+#ThysimModel
 
 Original Author: Rukan Shao
 
 Author of this README: Alan Chen, Jiuru Shao
 
-This readme is a new document that I have appended to the ThysimModel folder for future reference.  Due to its informal nature there may be parts that are explained poorly.  For example, all line numbers are relative to Rukan's code from 3/8/2016, NOT the code included in this directory.  I have attempted to remedy this by placing comments containing the word "STEP" at appropriate places.  Alan Chen can be contacted at apcucla@g.ucla.edu should it be necessary to contact someone for clarification.
+This readme is a new document that I have appended to the ThysimModel folder for future reference. Due to its informal nature there may be parts that are explained poorly. For example, all line numbers are relative to Rukan's code from 3/8/2016, NOT the code included in this directory. Alan Chen can be contacted at apcucla@g.ucla.edu should it be necessary to contact someone for clarification. The project is taken over since Oct 2016 by Jiuru Shao(shaojiuru@ucla.edu) for some updates/modification in its models.
 
 ThysimModel is merely a research testbed and was not built with adaptation for applications in mind.  For a version of the model meant for such a platform, see Simon Han's Thyrosim web application (biocyb1.cs.ucla.edu/thyrosim) and source (bitbucket.org/DistefanoLab/thyrosim/overview).  
 
@@ -23,7 +23,7 @@ The code in this directory has been intentionally stripped down to reduce confus
 ##1. Running the model for simulation
 - Open ThysimModel.m
 - Ensure that variable "searchMode" is equal to 0
-    1.If the fit for data other than the blue data is desired, set "fitIndex" to the corresponding number
+  1. If the fit for data other than the blue data is desired, set "fitIndex" to the corresponding number
 - Run ThysimModel in MATLAB console
 - Screen should show graph of thyroid hormone concentrations in serum, slow pool, and fast pool
 
