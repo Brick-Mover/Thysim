@@ -29,13 +29,16 @@ q = y;
 %*************************************************/
 
 %% Auxillary equations
-q4F = (p(24)+p(25)*q(1)+p(26)*q(1)^2+p(27)*q(1)^3)*q(4);                    %FT3p
-q1F = (p(7) +p(8) *q(1)+p(9) *q(1)^2+p(10)*q(1)^3)*q(1);                    %FT4p
+q4F = (p(24)+p(25)*q(1)+p(26)*q(1)^2+p(27)*q(1)^3)*q(4);            %FT3p
+q1F = (p(7) +p(8) *q(1)+p(9) *q(1)^2+p(10)*q(1)^3)*q(1);            %FT4p
 
 SR3 = (p(19)*q(19))*d3; % Brain delay
 SR4 = (p(1) *q(19))*d1; % Brain delay
+
 fCIRC = 1+(p(32)/(p(31)*exp(-q(9)))-1)*(1/(1+exp(10*q(9)-55)));
+
 SRTSH = (p(30)+p(31)*fCIRC*sin(pi/12*t-p(33)))*exp(-q(9));
+
 fdegTSH = p(34)+p(35)/(p(36)+q(7));
 fLAG = p(41)+2*q(8)^11/(p(42)^11+q(8)^11);
 f4 = p(37)+5*p(37)/(1+exp(2*q(8)-7));
@@ -80,7 +83,7 @@ qdot64 = p(22)*k64Mult*q4F;
 qdot05 = p(29)*k05Mult*q(5);
 qdot06 = k06Mult*q(6);
 
-qdot(1) = qdot12 + qdot13 - qdot21 - qdot31 + SR4 + p(11)*q(11) + u1;      %T4dot
+qdot(1) = qdot12 + qdot13 - qdot21 - qdot31 + SR4 + p(11)*q(11) + u1;      %qdot(1) := T4dot
 qdot(2) = qdot21 - qdot12 - qdot02 - qdot52;                               %T4fast
 qdot(3) = qdot31 - qdot13 - qdot03 - qdot63;                                        %T4slow
 qdot(4) = qdot45 + qdot46 - qdot54 - qdot64 + SR3 + p(28)*q(13) + u4;      %T3pdot

@@ -64,19 +64,17 @@ p(36) = 23;               %K50TSH          -
 p(37) = 0.118;            %k3              ?
 p(38) = 0.29;             %T4P-EU(adult)   ?          
 p(39) = 0.006;            %T3P-EU          ?
-p(40) = 0.037;            %KdegT3B         ?
-p(41) = 0.0034;           %KLAG-HYPO       ?
-p(42) = 5;                %KLAG            -
-p(43) = 1.3;              %k4dissolve      -
-% p(44) = 0.12*d2;        %k4excrete       ?
-
-p(44) = 0.119;            %???             ?
-
-p(45) = 1.78;             %k3dissolve      ?
+p(40) = 0.037;            %KdegT3B
+p(41) = 0.0034;           %KLAG-HYPO
+p(42) = 5;                %KLAG
+p(43) = 1.3;              %k4dissolve
+% p(44) = 0.12*d2;          %k4excrete; originally 0.119
+p(44) = 0.119;
+p(45) = 1.78;             %k3dissolve
 % p(46) = 0.12*d4;          %k3excrete; originally 0.118
-p(46) = 0.118;            
-p(47) = 3.2;              %Vp              -
-p(48) = 4.3;              %VTSH            -
+p(46) = 0.118;
+p(47) = 3.2;              %Vp
+p(48) = 4.3;              %VTSH
 
 %% Conversion factors (to match thyrosim plots):
 T4conv  = 777/3.2; %T4 (q1) = 777/3.2 (ug/umol)/l
