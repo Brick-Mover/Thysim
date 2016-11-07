@@ -23,6 +23,8 @@ global k45Mult k54Mult k46Mult k64Mult k05Mult k06Mult;
 global k12Mult k21Mult k13Mult k31Mult k02Mult k03Mult;
 global k52Mult k63MultD1 k63MultD2 D2inhibit;
 
+global paramMat
+
 %% update search parameters
 
 % STEP 5: set parameters equal to inputs
@@ -91,6 +93,7 @@ k63MultD2 = ( (6.6781e-4) * ( p(18) + 0.639 + 0.639^2 * D2inhibit ) ) / ( p(17) 
 iteration = iteration + 1;
 display(iteration)
 display(input);
+paramMat = [paramMat; input];
 
 %% Calculate our curve
 [x, y]=ode15s(@ODEs, tspan, y0, options);

@@ -67,9 +67,9 @@ H2Slow = ( p(17) * q(3) ) / ( p(18) + q(3) + q(3)^2 * D2inhibit );
 
 %% ODEs
 qdot12 = p(3)*k12Mult*q(2);         %p(3) = k12
-qdot21 = p(6)*k21Mult*q1F;             %p(6) = k21
+qdot21 = p(6)*k21Mult*q1F;          %p(6) = k21
 qdot13 = p(4)*k13Mult*q(3);         %p(4) = k13
-qdot31 = p(5)*k31Mult*q1F;             %p(5) = k31
+qdot31 = p(5)*k31Mult*q1F;          %p(5) = k31
 qdot02 = p(12)*k02Mult*q(2);
 qdot03 = k03Mult * q(3);
 
@@ -83,12 +83,12 @@ qdot64 = p(22)*k64Mult*q4F;
 qdot05 = p(29)*k05Mult*q(5);
 qdot06 = k06Mult*q(6);
 
-qdot(1) = qdot12 + qdot13 - qdot21 - qdot31 + SR4 + p(11)*q(11) + u1;      %qdot(1) := T4dot
+qdot(1) = qdot12 + qdot13 - qdot21 - qdot31 + SR4 + p(11)*q(11) + u1;      %T4dot
 qdot(2) = qdot21 - qdot12 - qdot02 - qdot52;                               %T4fast
-qdot(3) = qdot31 - qdot13 - qdot03 - qdot63;                                        %T4slow
+qdot(3) = qdot31 - qdot13 - qdot03 - qdot63;                               %T4slow
 qdot(4) = qdot45 + qdot46 - qdot54 - qdot64 + SR3 + p(28)*q(13) + u4;      %T3pdot
 qdot(5) = qdot54 + qdot52 - qdot45 - qdot05;                               %T3fast
-qdot(6) = qdot64 + qdot63 - qdot46 - qdot06;                                        %T3slow
+qdot(6) = qdot64 + qdot63 - qdot46 - qdot06;                               %T3slow
 qdot(7) = SRTSH-fdegTSH*q(7);                                              %TSHp
 qdot(8) = f4/p(38)*q(1)+p(37)/p(39)*q(4)-p(40)*q(8);                       %T3B
 qdot(9) = fLAG*(q(8)-q(9));                                                %T3B LAG
