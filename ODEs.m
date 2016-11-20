@@ -16,10 +16,7 @@ function dqdt = ODEs(t, y)
 % t is in hours?
 
 %kinetic parameters
-global p d1 d2 d3 d4 u1 u4  kdelay n y0;
-global T3conv T4conv;
-
-dqdt = zeros(20,1); 
+global p d1 d3 u1 u4  kdelay n;
 
 % maping species concentrations to y
 q = y;
@@ -51,7 +48,7 @@ H1Slow = p(15) * q(3)^n / (p(16)^n + q(3)^n);
 H2Slow = p(17) * q(3)^1 / (p(18)^1 + q(3)^1);
 
 %% New Stuff for May
-global newK2 D1stim D1deg newK3
+global D1stim D1deg
 global k45Mult k54Mult k46Mult k64Mult k05Mult k06Mult;
 global k12Mult k21Mult k13Mult k31Mult k02Mult k03Mult;
 global k52Mult k63MultD1 k63MultD2;
@@ -92,10 +89,10 @@ qdot(6) = qdot64 + qdot63 - qdot46 - qdot06;                               %T3sl
 qdot(7) = SRTSH-fdegTSH*q(7);                                              %TSHp
 qdot(8) = f4/p(38)*q(1)+p(37)/p(39)*q(4)-p(40)*q(8);                       %T3B
 qdot(9) = fLAG*(q(8)-q(9));                                                %T3B LAG
-qdot(10) = -p(43)*q(10);                                                   %T4PILLdot
-qdot(11) =  p(43)*q(10)-(p(44)+p(11))*q(11);                               %T4GUTdot
-qdot(12) = -p(45)*q(12);                                                   %T3PILLdot
-qdot(13) =  p(45)*q(12)-(p(46)+p(28))*q(13);                               %T3GUTdot
+qdot(10) = -p(43)*q(10);                                                   %T4PILL
+qdot(11) =  p(43)*q(10)-(p(44)+p(11))*q(11);                               %T4GUT
+qdot(12) = -p(45)*q(12);                                                   %T3PILL
+qdot(13) =  p(45)*q(12)-(p(46)+p(28))*q(13);                               %T3GUT
 
 %% Delay ODEs
 qdot(14) = -kdelay*q(14) +q(7);                                             %delay1

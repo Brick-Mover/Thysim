@@ -45,7 +45,7 @@ global newK2 D1stim D1deg newK3
 global k45Mult k54Mult k46Mult k64Mult k05Mult k06Mult;
 global k12Mult k21Mult k13Mult k31Mult k02Mult k03Mult;
 global k52Mult k63MultD1 k63MultD2 D2inhibit;
-global T3conv T4conv;
+
 
 if fitIndex == 2
     % blue data
@@ -260,9 +260,9 @@ end
 
 % run simulation using Matlab ODE Solver
 if searchMode == 1
-	LMoptions = optimset('Algorithm','levenberg-marquardt','TolFun',1e-6,'MaxFunEvals',30);
+	%LMoptions = optimset('Algorithm','levenberg-marquardt','TolFun',1e-6,'MaxFunEvals',30);
     % Solves nonlinear least-squares curve fitting problems
-	[x,resnorm,res,eflag,output1,lambda,jacobian] = lsqnonlin(@CostFunction,startPoint,[],[],LMoptions);
+	%[x,resnorm,res,eflag,output1,lambda,jacobian] = lsqnonlin(@CostFunction,startPoint,[],[],LMoptions);
 end
 
 if searchMode == 2
@@ -284,12 +284,7 @@ end
 
 
 %% display covariance matrix
-if searchMode == 1
-    Hessian = (jacobian')*jacobian;
-    Rank = Rank(Hessian)
-    Cov = inv(Hessian);
-    Cor = corrcov(Cov);
-end
+
 
 %% Display...
 % display('T3 muscle/serum ratio');
@@ -298,10 +293,7 @@ end
 % display((mean(y((end - 2400):end,3)))/(mean(y((end - 2400):end,1))));
 
 PlotSetup()
-global q1F q4F
-global SR3 SR4 SR3Old SR4Old
-global u1 u4
-global T4Gut T4GutOld
+
 plotOld = 1;
 if fitIndex == 1
     PlotData('red')

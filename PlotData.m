@@ -1,7 +1,6 @@
 function PlotData( color )
 
 global fitIndex;
-global T3conv T4conv TSHconv
 global dataTimeForPlots
 global dataPointsT3Red errorT3Red
 global dataPointsT3Blue errorT3Blue
