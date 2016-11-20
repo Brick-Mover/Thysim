@@ -57,12 +57,12 @@ global k12Mult k21Mult k13Mult k31Mult k02Mult k03Mult;
 global k52Mult k63MultD1 k63MultD2;
 
 H1Fast = q(2) * q(20) / p(14);
-qdot(20) = D1deg * p(13) + D1stim * (q(5) - 0.0112585458130547) - D1deg * q(20);
+qdot(20) = D1deg * p(13) + D1stim * (q(5) - 0.0112585458130547) - D1deg * q(20); %D1 ODE 
 
 H1Slow = q(3) * q(20) / p(16);
 
 global D2inhibit
-qdot(21) = 0;
+qdot(21) = 0; %D2 assume constant
 H2Slow = ( p(17) * q(3) ) / ( p(18) + q(3) + q(3)^2 * D2inhibit );
 
 %% ODEs
@@ -83,10 +83,10 @@ qdot64 = p(22)*k64Mult*q4F;
 qdot05 = p(29)*k05Mult*q(5);
 qdot06 = k06Mult*q(6);
 
-qdot(1) = qdot12 + qdot13 - qdot21 - qdot31 + SR4 + p(11)*q(11) + u1;      %T4dot
+qdot(1) = qdot12 + qdot13 - qdot21 - qdot31 + SR4 + p(11)*q(11) + u1;      %T4p
 qdot(2) = qdot21 - qdot12 - qdot02 - qdot52;                               %T4fast
 qdot(3) = qdot31 - qdot13 - qdot03 - qdot63;                               %T4slow
-qdot(4) = qdot45 + qdot46 - qdot54 - qdot64 + SR3 + p(28)*q(13) + u4;      %T3pdot
+qdot(4) = qdot45 + qdot46 - qdot54 - qdot64 + SR3 + p(28)*q(13) + u4;      %T3p
 qdot(5) = qdot54 + qdot52 - qdot45 - qdot05;                               %T3fast
 qdot(6) = qdot64 + qdot63 - qdot46 - qdot06;                               %T3slow
 qdot(7) = SRTSH-fdegTSH*q(7);                                              %TSHp

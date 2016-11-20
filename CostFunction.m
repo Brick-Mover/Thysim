@@ -23,7 +23,6 @@ global k45Mult k54Mult k46Mult k64Mult k05Mult k06Mult;
 global k12Mult k21Mult k13Mult k31Mult k02Mult k03Mult;
 global k52Mult k63MultD1 k63MultD2 D2inhibit;
 
-global paramMat
 
 %% update search parameters
 
@@ -93,7 +92,6 @@ k63MultD2 = ( (6.6781e-4) * ( p(18) + 0.639 + 0.639^2 * D2inhibit ) ) / ( p(17) 
 iteration = iteration + 1;
 display(iteration)
 display(input);
-paramMat = [paramMat; input];
 
 %% Calculate our curve
 [x, y]=ode15s(@ODEs, tspan, y0, options);
@@ -136,8 +134,8 @@ end
 
 
 %% Nelder Mead can only use single value residuals
-if sum(dataPointsWeightT3) ~= 0 && sum(dataPointsWeightT4) ~= 0
-weight = 1000;
-display([retval(2),retval(1)*weight])
-retval = 0 + retval(2) + weight * retval(1);
-end
+%if sum(dataPointsWeightT3) ~= 0 && sum(dataPointsWeightT4) ~= 0
+%weight = 1000;
+%display([retval(2),retval(1)*weight])
+%retval = 0 + retval(2) + weight * retval(1);
+%end

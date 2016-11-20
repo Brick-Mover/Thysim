@@ -17,8 +17,7 @@ iteration = 2;
 %used by Plotdata
 global time y yOld
 
-% @Jiuru Shao covariance matrix for search points
-global paramMat
+
 
 %% newer model
 
@@ -280,16 +279,17 @@ if searchMode == 3
     CostFunction(x);
 end
 
-
+% y -> q
 [time, y]=ode15s(@ODEs, tspan, y0, options);
 
 
 %% display covariance matrix
-%disp(paramMat);
-C = cov(paramMat);
-R = corrcov(C);
-disp(C);
-disp(R);
+if searchMode == 1
+    Hessian = (jacobian')*jacobian;
+    Rank = Rank(Hessian)
+    Cov = inv(Hessian);
+    Cor = corrcov(Cov);
+end
 
 %% Display...
 % display('T3 muscle/serum ratio');
