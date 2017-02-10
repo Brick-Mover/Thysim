@@ -12,6 +12,7 @@ function retval = CostFunction(input)
 global options tspan time_interval;
 global dataPointsTime dataPointsT3 dataPointsT4
 global dataPointsWeightT3 dataPointsWeightT4
+global dataPointsT3Red dataPointsT4Red dataPointsT3Blue dataPointsT4Blue
 global T3conv T4conv
 global p n
 global y0
@@ -90,45 +91,49 @@ k63MultD2 = ( (6.6781e-4) * ( p(18) + 0.639 + 0.639^2 * D2inhibit ) ) / ( p(17) 
 
 %% Display Iteration Counter
 iteration = iteration + 1;
-display(iteration)
+display(iteration);
 display(input);
 
 %% Calculate our curve
 [x, y]=ode15s(@ODEs, tspan, y0, options);
 
 %% Calculate Curve/Data Residuals
-retval = [0 0];
-NUMPTS = size(dataPointsTime);
+% the initial version is wrong, because lsqnonlin should output a vector
+% of differences, instead of their squared sum
+
+NUMPTS = size(dataPointsTime);  % [1,9]
+retval = zeros(1, NUMPTS(2)*2);
+
 t = round(dataPointsTime/time_interval+1);
-for i = 1:NUMPTS(2)
-   m = dataPointsWeightT3(i)*(abs(y(t(i),4)*T3conv - dataPointsT3(i)))^2;
-   retval(1) = retval(1) + m^2;
-   
-   m = dataPointsWeightT4(i)*(abs(y(t(i),1)*T4conv - dataPointsT4(i)))^2;
-   retval(2) = retval(2) + m^2;
+
+for i = 1: NUMPTS(2)
+   retval(i) = (1/dataPointsT3Blue(i))*(y(t(i),4)*T3conv - dataPointsT3(i));
+   retval(i+NUMPTS(2)) = (1/dataPointsT4Blue(i))*(y(t(i),1)*T4conv - dataPointsT4(i));
 end
 
+display(retval)
+
 % TODO: figure out how to add weights for slow compartment data
-%retval(1) = retval(1) + (mean(y((end - 24/time_interval):end,6)) - );
-%retval(2) = retval(2) + (mean(y((end - 24/time_interval):end,3)) - );
+% retval(1) = retval(1) + (mean(y((end - 24/time_interval):end,6)) - );
+% retval(2) = retval(2) + (mean(y((end - 24/time_interval):end,3)) - );
 
 
-%divide cost by the weighted variance
-T3Mean = sum(dataPointsWeightT3 .* dataPointsT3) / sum(dataPointsWeightT3);
-T4Mean = sum(dataPointsWeightT4 .* dataPointsT4) / sum(dataPointsWeightT4);
-SStotT3 = sum(dataPointsWeightT3 .* (dataPointsT3 - T3Mean).^2 );
-SStotT4 = sum(dataPointsWeightT4 .* (dataPointsT4 - T4Mean).^2 );
+% divide cost by the weighted variance
+% T3Mean = sum(dataPointsWeightT3 .* dataPointsT3) / sum(dataPointsWeightT3);
+% T4Mean = sum(dataPointsWeightT4 .* dataPointsT4) / sum(dataPointsWeightT4);
+% SStotT3 = sum(dataPointsWeightT3 .* (dataPointsT3 - T3Mean).^2 );
+% SStotT4 = sum(dataPointsWeightT4 .* (dataPointsT4 - T4Mean).^2 );
 
 %% Marquardt Levenberg can use multidimensional residuals
-retval(1) = retval(1)/SStotT3;
-retval(2) = retval(2)/SStotT4;
+% retval(1) = retval(1)/SStotT3;
+% retval(2) = retval(2)/SStotT4;
 
 
-if sum(dataPointsWeightT3) == 0
-    retval = retval(2);
-elseif sum(dataPointsWeightT4) == 0
-    retval(2) = retval(1);
-    retval = retval(2);
+% if sum(dataPointsWeightT3) == 0
+%     retval = retval(2);
+% elseif sum(dataPointsWeightT4) == 0
+%     retval(2) = retval(1);
+%     retval = retval(2);
 end
 
 

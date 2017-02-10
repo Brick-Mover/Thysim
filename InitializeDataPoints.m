@@ -16,7 +16,7 @@ global fitIndex
 time_start = 0;
 time_end = 7*24; %168 hours = 7 days
 time_interval = 0.01;
-tspan = [time_start:time_interval:time_end];
+tspan = time_start:time_interval:time_end;
 
 %% Initialize Red and Blue data points
 dataPointsTime=[0,1,2,4,6,24,48,96,168];
@@ -89,6 +89,9 @@ if fitWeight == 1
         dataPointsWeightT4 = errorT4Norm * dataPointsWeightT4 ./ errorT4Blue;
     end
 end
+
+display(dataPointsWeightT3)
+display(dataPointsWeightT4)
 
 end
 

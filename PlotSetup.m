@@ -1,8 +1,8 @@
 function PlotSetup( )
 
-global T3conv T4conv TSHconv
+global T3conv T4conv
 global time y
-global dataPointsT3Red dataPointsT3Blue
+
 
 poolName = {'Serum T4 Conc'; 'Liver+Kidney T4'; 'Muscle+Brain etc T4'; 'Serum T3 Conc'; 'Liver+Kidney T3 and D1'; 'Muscle+Brain etc T3'};
 

@@ -260,9 +260,13 @@ end
 
 % run simulation using Matlab ODE Solver
 if searchMode == 1
-	%LMoptions = optimset('Algorithm','levenberg-marquardt','TolFun',1e-6,'MaxFunEvals',30);
+	LMoptions = optimset('Algorithm','levenberg-marquardt','TolFun',1e-6,'MaxFunEvals',30);
     % Solves nonlinear least-squares curve fitting problems
-	%[x,resnorm,res,eflag,output1,lambda,jacobian] = lsqnonlin(@CostFunction,startPoint,[],[],LMoptions);
+	[x,resnorm,res,eflag,output1,lambda,Jacobian] = lsqnonlin(@CostFunction,startPoint,[],[],LMoptions);
+    
+    Jacobian = full(Jacobian);
+    varp = inv(Jacobian'*Jacobian);
+    CORRMat = corrcov(varp);
 end
 
 if searchMode == 2
@@ -274,7 +278,7 @@ end
 % @author Alan Chen
 if searchMode == 3
     [x, returnCost] = anneal(@CostFunction, startPoint);
-    % added because the final run of costfunction is not the 
+    % added because the final run of cost function is not the 
     % actual values that anneal decides is the best input
     CostFunction(x);
 end
@@ -283,7 +287,6 @@ end
 [time, y]=ode15s(@ODEs, tspan, y0, options);
 
 
-%% display covariance matrix
 
 
 %% Display...
